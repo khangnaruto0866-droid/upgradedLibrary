@@ -8,17 +8,17 @@ public class Regular extends Member {
     }
 
     @Override
-    public int getBorrowLimit(){
+    public final int getBorrowLimit(){
         return 3;
     }
 
     @Override
-    public int getDueLimit(){
+    public final int getDueLimit(){
         return 7;
     }
 
     @Override
-    public int getFineFee(int overDueDay){
+    public final int getFineFee(int overDueDay){
         return overDueDay*5;
     }
 }

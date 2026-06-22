@@ -1,6 +1,7 @@
 package storage;
 
 import model.Regular;
+import util.ExistCheck;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -20,9 +21,8 @@ public class RegStorage {
 
     public void saveOne(Regular reg){
         File folder = new File(FOLDER);
-        if(!folder.exists()){
-            folder.mkdir();
-        }
+        ExistCheck.fileMkdir(folder);
+
 
         try(FileWriter fileWriter = new FileWriter(FILE_PATH,true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)){
@@ -38,9 +38,8 @@ public class RegStorage {
 
     public void saveAll(List<Regular> regularList){
         File folder = new File(FOLDER);
-        if(!folder.exists()){
-            folder.mkdir();
-        }
+        ExistCheck.fileMkdir(folder);
+
 
         try(FileWriter fileWriter = new FileWriter(FILE_PATH,false);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)){

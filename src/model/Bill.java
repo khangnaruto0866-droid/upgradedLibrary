@@ -29,7 +29,7 @@ public class Bill {
         return book;
     }
 
-    public void setBook(Book book) {
+    public final void setBook(Book book) {
         this.book = ExistCheck.noNull(book);
     }
 
@@ -37,7 +37,7 @@ public class Bill {
         return member;
     }
 
-    public void setMember(Member member) {
+    public final void setMember(Member member) {
         this.member = ExistCheck.noNull(member);
     }
 
@@ -45,7 +45,7 @@ public class Bill {
         return borrowDay;
     }
 
-    public void setBorrowDay(LocalDate borrowDay) {
+    public final void setBorrowDay(LocalDate borrowDay) {
         this.borrowDay = ExistCheck.noNull(borrowDay);
     }
 
@@ -53,7 +53,17 @@ public class Bill {
         return returnDay;
     }
 
-    public void setReturnDay(LocalDate returnDay) {
+    public final void setReturnDay(LocalDate returnDay) {
+        this.returnDay = returnDay;
+    }
+
+    public void markReturnedDay(LocalDate returnDay){
+        ExistCheck.noNull(returnDay);
+
+        if(returnDay.isBefore(borrowDay)){
+            throw new IllegalArgumentException("return day must be after borrow day");
+        }
+
         this.returnDay = returnDay;
     }
 

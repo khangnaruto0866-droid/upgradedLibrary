@@ -1,6 +1,7 @@
 package storage;
 
 import model.*;
+import util.ExistCheck;
 import util.Validator;
 
 import java.io.*;
@@ -22,10 +23,10 @@ public class BillStorage {
     }
 
     public void saveOne(Bill bill){
+
+        //write this in util, write one check all
         File folder = new File(FOLDER);
-        if(!folder.exists()){
-            folder.mkdir();
-        }
+        ExistCheck.fileMkdir(folder);
 
         try(FileWriter fileWriter = new FileWriter(FILE_PATH,true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)){
@@ -42,9 +43,8 @@ public class BillStorage {
 
     public void saveAll(List<Bill>billList){
         File folder = new File(FOLDER);
-        if(!folder.exists()){
-            folder.mkdir();
-        }
+        ExistCheck.fileMkdir(folder);
+
 
         try(FileWriter fileWriter = new FileWriter(FILE_PATH,false);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)){

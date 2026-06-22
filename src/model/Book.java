@@ -25,7 +25,7 @@ public class Book {
         return title;
     }
 
-    public void setTitle(String title) {
+    public final void setTitle(String title) {
         this.title = Validator.validTitle(title);
     }
 
@@ -33,7 +33,7 @@ public class Book {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public final void setAuthor(String author) {
         this.author = Validator.validName(author);
     }
 
@@ -41,7 +41,7 @@ public class Book {
         return genre;
     }
 
-    public void setGenre(String genre) {
+    public final void setGenre(String genre) {
         this.genre = Validator.validTitle(genre);
     }
 
@@ -49,7 +49,7 @@ public class Book {
         return pubYear;
     }
 
-    public void setPubYear(int pubYear) {
+    public final void setPubYear(int pubYear) {
         this.pubYear = Validator.validYear(pubYear);
     }
 
@@ -57,7 +57,7 @@ public class Book {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public final void setQuantity(int quantity) {
         this.quantity = Validator.validNoNegative(quantity);
     }
 
@@ -65,12 +65,29 @@ public class Book {
         return borrowCount;
     }
 
-    public void setBorrowCount(int borrowCount) {
+    public final void setBorrowCount(int borrowCount) {
         this.borrowCount = Validator.validNoNegative(borrowCount);
     }
 
     public boolean isAvailable(){
         return(this.quantity-this.borrowCount)>0;
+    }
+
+
+
+    public void borrowOneBook(){
+        if(!isAvailable()){
+            throw new IllegalArgumentException("there's no book left");
+        }
+        this.borrowCount++;
+    }
+
+    public void returnOneBook(){
+       if(borrowCount<=0){
+           throw new IllegalArgumentException("cannot return when not borrow");
+       }
+
+       borrowCount--;
     }
 
     public String getStatus(){

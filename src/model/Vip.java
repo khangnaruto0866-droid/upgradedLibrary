@@ -8,17 +8,17 @@ public class Vip extends Member{
     }
 
     @Override
-    public int getBorrowLimit(){
+    public final int getBorrowLimit(){
         return 5;
     }
 
     @Override
-    public int getDueLimit(){
+    public final int getDueLimit(){
         return 14;
     }
 
     @Override
-    public int getFineFee(int overDueDay){
+    public final int getFineFee(int overDueDay){
         return overDueDay*3;
     }
 }

@@ -4,6 +4,7 @@ import model.Member;
 import model.Regular;
 import model.Vip;
 import util.ExistCheck;
+import util.Validator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,7 +87,6 @@ public class MemService {
 
     public void updateMem(String memId, String name, String phone, String email) {
         Member member = ExistCheck.noNull(findMemById(memId));
-
         checkDupContact(phone, email,memId);
 
         member.setName(name);

@@ -66,6 +66,14 @@ public class BillService {
         Member member = ExistCheck.noNull(memService.findMemById(memId));
         String billId = generateBillId();
 
+        for(Bill bill:bills){
+            if(bill.getMember().getMemberId().equals(memId)&&
+                    bill.getBook().getBookId().equals(bookId)&&
+                    bill.getReturnDay()==null){
+                throw new IllegalArgumentException("❌ Error: Cannot borrow the same book twice!");
+            }
+        }
+
         if(!book.isAvailable()){
             throw new IllegalArgumentException("❌ Error: Book is out of stock!");
         }
@@ -78,16 +86,8 @@ public class BillService {
             throw new IllegalArgumentException("❌ Error: Borrow date cannot be in the future!");
         }*/
 
-        for(Bill bill:bills){
-            if(bill.getMember().getMemberId().equals(memId)&&
-               bill.getBook().getBookId().equals(bookId)&&
-               bill.getReturnDay()==null){
-                throw new IllegalArgumentException("❌ Error: Cannot borrow the same book twice!");
-            }
-        }
-
-        book.setBorrowCount(book.getBorrowCount()+1);
-        member.setBookHold(member.getBookHold()+1);
+        book.borrowOneBook();
+        member.BookHoldForBorrowOneBook();
         Bill bill = new Bill(billId,book,member,borrowDay);
         bills.add(bill);
         billStorage.saveOne(bill);
@@ -106,9 +106,9 @@ public class BillService {
             throw new IllegalArgumentException("❌ Error: Return date cannot be BEFORE borrow date!");
         }
 
-        bill.setReturnDay(returnDay);
-        bill.getBook().setBorrowCount(bill.getBook().getBorrowCount()-1);
-        bill.getMember().setBookHold(bill.getMember().getBookHold()-1);
+        bill.markReturnedDay(returnDay);
+        bill.getBook().returnOneBook();
+        bill.getMember().BookHoldForReturnOneBook();
         billStorage.saveAll(bills);
         bookService.updateBookData();
         memService.updateMemData();

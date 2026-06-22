@@ -1,6 +1,7 @@
 package storage;
 
 import model.Book;
+import util.ExistCheck;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -22,9 +23,8 @@ public class BookStorage {
 
     public void saveOne(Book book){
         File folder = new File(FOLDER);
-        if(!folder.exists()){
-            folder.mkdir();
-        }
+        ExistCheck.fileMkdir(folder);
+
 
         try(FileWriter fileWriter = new FileWriter(FILE_PATH,true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)){
@@ -40,9 +40,8 @@ public class BookStorage {
 
     public void saveAll(List<Book>bookList){
         File folder = new File(FOLDER);
-        if(!folder.exists()){
-            folder.mkdir();
-        }
+        ExistCheck.fileMkdir(folder);
+
 
         try(FileWriter fileWriter = new FileWriter(FILE_PATH,false);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)){

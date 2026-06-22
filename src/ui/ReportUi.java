@@ -159,7 +159,7 @@ public class ReportUi {
             }
 
             else{
-                System.out.printf(" %-10s | %-30s | %-15s%n", "Book ID", "Title", "Times Borrowed");
+                System.out.printf(" %-10s | %-30s | %-15s%n", "Member ID", "Name", "Times Borrowed");
                 for(String line:memRanking){
                     System.out.println(" " + line);
                 }

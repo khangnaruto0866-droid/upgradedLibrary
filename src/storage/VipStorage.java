@@ -1,6 +1,7 @@
 package storage;
 
 import model.Vip;
+import util.ExistCheck;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -20,9 +21,8 @@ public class VipStorage {
 
     public void saveOne(Vip vip){
         File folder = new File(FOLDER);
-        if(!folder.exists()){
-            folder.mkdir();
-        }
+        ExistCheck.fileMkdir(folder);
+
 
         try(FileWriter fileWriter = new FileWriter(FILE_PATH,true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)){
@@ -38,9 +38,8 @@ public class VipStorage {
 
     public void saveAll(List<Vip>vipList){
         File folder = new File(FOLDER);
-        if(!folder.exists()){
-            folder.mkdir();
-        }
+        ExistCheck.fileMkdir(folder);
+
 
         try(FileWriter fileWriter = new FileWriter(FILE_PATH,false);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)){

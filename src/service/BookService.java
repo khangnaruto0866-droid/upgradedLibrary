@@ -55,6 +55,7 @@ public class BookService {
         for(Book book : books){
             if((book.getBookId().toLowerCase().contains(keyword))||
                 book.getTitle().toLowerCase().contains(keyword)||
+                book.getAuthor().toLowerCase().contains(keyword)||
                 book.getGenre().toLowerCase().contains(keyword)){
                 tempList.add(book);
             }

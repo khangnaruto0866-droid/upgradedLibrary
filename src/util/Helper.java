@@ -2,6 +2,7 @@ package util;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.Scanner;
 
 public class Helper {
@@ -11,7 +12,8 @@ public class Helper {
         this.sc = sc;
     }
 
-    public static final DateTimeFormatter DTF = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public static final DateTimeFormatter DTF = DateTimeFormatter.ofPattern("dd/MM/uuuu")
+            .withResolverStyle(ResolverStyle.STRICT);
 
     public String readPhone(String message){
         while(true){

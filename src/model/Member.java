@@ -23,7 +23,7 @@ public abstract class Member {
         return name;
     }
 
-    public void setName(String name) {
+    public final void setName(String name) {
         this.name = Validator.validName(name);
     }
 
@@ -31,7 +31,7 @@ public abstract class Member {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public final void setPhone(String phone) {
         this.phone = Validator.validPhone(phone);
     }
 
@@ -39,7 +39,7 @@ public abstract class Member {
         return email;
     }
 
-    public void setEmail(String email) {
+    public final void setEmail(String email) {
         this.email = Validator.validMail(email);
     }
 
@@ -47,13 +47,29 @@ public abstract class Member {
         return bookHold;
     }
 
-    public void setBookHold(int bookHold) {
+    public final void setBookHold(int bookHold) {
         this.bookHold = Validator.validNoNegative(bookHold);
     }
 
     public abstract int getBorrowLimit();
     public abstract int getDueLimit();
     public abstract int getFineFee(int overDueDay);
+
+    public void BookHoldForBorrowOneBook(){
+        if(bookHold>=getBorrowLimit()){
+            throw new IllegalArgumentException("member has reached borrow limit");
+        }
+
+        bookHold++;
+    }
+
+    public void BookHoldForReturnOneBook(){
+        if(bookHold<=0){
+            throw new IllegalArgumentException("cannot return book when not borrow");
+        }
+
+        bookHold--;
+    }
 
     @Override
     public String toString() {

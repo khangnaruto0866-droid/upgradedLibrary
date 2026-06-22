@@ -3,6 +3,8 @@ package util;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 public class Validator {
     private static final String PHONE_FORMAT = "^0[35789][0-9]{8}$";
@@ -12,9 +14,10 @@ public class Validator {
     private static final String VIP_MEM_ID_FORMAT = "^VIP\\d{3}$";
     private static final String BOOK_ID_FORMAT = "^BK\\d{3}$";
     private static final String BILL_ID_FORMAT = "^T\\d{3}$";
-    private static final String NAME_FORMAT = "^[\\p{L}\\s]+$";
+    private static final String NAME_FORMAT = "^[a-zA-zÀ-ỹ\\s]+$";
     private static final String DATE_FORMAT = "dd/MM/yyyy";
-    private static final DateTimeFormatter FORMATTER=DateTimeFormatter.ofPattern(DATE_FORMAT);
+    private static final DateTimeFormatter FORMATTER=DateTimeFormatter.ofPattern("dd/MM/uuuu")
+            .withResolverStyle(ResolverStyle.STRICT);
 
     public static String validString(String string){
         if(string==null||string.trim().isEmpty()){
@@ -107,8 +110,8 @@ public class Validator {
         date=validString(date);
         try{
             return LocalDate.parse(date.trim(),FORMATTER);
-        }catch (DateTimeException e){
-            throw new IllegalArgumentException("❌ Error: Invalid date format. Must be " +DATE_FORMAT);
+        }catch (DateTimeParseException e){
+            throw new IllegalArgumentException("❌ Error: The date does not exist or invalid date format. Must be " + DATE_FORMAT);
         }
     }
 

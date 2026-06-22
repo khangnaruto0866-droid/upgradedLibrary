@@ -179,7 +179,7 @@ public class MemUi {
             boolean confirm = helper.readYesNo(" 👉 Enter [Y] to Update or [N] to Cancel: ");
 
             if(confirm){
-                memService.updateMem(memId,name,phone,email);
+                memService.updateMem(memId,finalName,finalPhone,finalEmail);
                 System.out.println("\n ✅ SUCCESS: Member information updated successfully!");
             }
 
