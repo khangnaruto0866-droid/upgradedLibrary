@@ -57,7 +57,7 @@ public abstract class Member {
 
     public void BookHoldForBorrowOneBook(){
         if(bookHold>=getBorrowLimit()){
-            throw new IllegalArgumentException("member has reached borrow limit");
+            throw new IllegalArgumentException("❌ Error: Member has reached borrow limit");
         }
 
         bookHold++;
@@ -65,7 +65,7 @@ public abstract class Member {
 
     public void BookHoldForReturnOneBook(){
         if(bookHold<=0){
-            throw new IllegalArgumentException("cannot return book when not borrow");
+            throw new IllegalArgumentException("❌ Error: Cannot return book when not borrow");
         }
 
         bookHold--;

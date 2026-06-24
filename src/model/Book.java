@@ -77,14 +77,14 @@ public class Book {
 
     public void borrowOneBook(){
         if(!isAvailable()){
-            throw new IllegalArgumentException("there's no book left");
+            throw new IllegalArgumentException("❌ Error: There's no book left");
         }
         this.borrowCount++;
     }
 
     public void returnOneBook(){
        if(borrowCount<=0){
-           throw new IllegalArgumentException("cannot return when not borrow");
+           throw new IllegalArgumentException("❌ Error: Cannot return when not borrow");
        }
 
        borrowCount--;
